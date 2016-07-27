@@ -1,0 +1,25 @@
+<div class="loginColumns animated fadeInDown" ng-controller="authController">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="font-bold"><img alt="image" src="assets/images/logo-crofarm-green.png" /></h2>
+            <h3>Welcome to Crofarm</h3>
+            <p>Delivering freshness direct from farms to your neighbourhood store.
+            </p>
+            <p>Login in. To see it in action.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="ibox-content">
+                <form class="m-t" role="form" ng-init="initLoginForm()" ng-submit="submitLoginForm()">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Username" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" required="">
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr/>
+</div>

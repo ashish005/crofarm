@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn"><button type="button" class="btn btn-sm btn-primary"> Go!</button> </span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" id="loading-example-btn" ng-click="reset()" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-white btn-sm">Excel</button>
+                    <button type="button" class="btn btn-white btn-sm">PDF</button>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                        <button class="btn btn-white btn-sm">{{ firstPage }}</button>
+                        <button class="btn btn-white btn-sm">{{ data.length }}</button>
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ui-grid="gridOptions"  ui-grid-infinite-scroll style="height: {{gridHeight}}"></div>
+        </div>
+    </div>
+</div>

@@ -220,7 +220,7 @@
             },
             link: function ($scope, elem) {},
             controller:function($scope, $element){
-                $scope.gridHeight =  $(window).height()-270 +"px";
+                $scope.gridHeight =  $(window).height()-340 +"px";
                 $scope.gridOptions = {
                     columnDefs: $scope.columnDefs,
                     data: 'data',

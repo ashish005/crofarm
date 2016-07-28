@@ -166,8 +166,8 @@
     function popupService($q, modalService, $timeout) {
         var modalDefaults = { backdrop: true, keyboard: true, modalFade: true, templateUrl: '', windowClass: 'default-popup' };
         var _model = {};
-        _model.showPopup = function (template, model) {
-            modalDefaults.windowClass = 'default-popup';
+        _model.showPopup = function (template, model, windowClass) {
+            modalDefaults.windowClass = windowClass || 'default-popup';
             modalDefaults.templateUrl = template;
             return modalService.showModal(modalDefaults, model);
         };

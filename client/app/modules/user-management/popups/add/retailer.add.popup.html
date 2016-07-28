@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" data-ng-click="modalOptions.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title"> <strong> Retailer Information </strong> </h4>
+</div>
+<div class="modal-body" ng-init="model = modalOptions.model">
+    <form class="form-horizontal">
+        <div class="row setup-content">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group"><label class="col-lg-4 control-label">Name <span class="compulsary">*</span></label>
+                            <div class="col-lg-8"><input type="name" placeholder="Retailer Name" class="form-control" ng-model="retailerData.retailer.basic_info.name" required>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Email ID <span class="compulsary">*</span></label>
+                            <div class="col-lg-8"><input type="name" placeholder="Email ID" class="form-control" ng-model="retailerData.retailer.basic_info.email" required>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">PAN Number</label>
+                            <div class="col-lg-8"><input type="name" placeholder="PAN Card" class="form-control" ng-model="retailerData.retailer.basic_info.pan_number">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Phone Number <span class="compulsary">*</span></label>
+                            <div class="col-lg-8"><input type="name" placeholder="Phone Number" class="form-control" ng-model="retailerData.retailer.basic_info.phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Avarage Daily Sale </label>
+                            <div class="col-lg-8"><input type="Average Daily Sale" placeholder="Father's Name" class="form-control" ng-model="retailerData.retailer.basic_info.avg_daily_sales">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Type of Shope</label>
+                            <div class="col-lg-8"><input type="name" placeholder="Type of Shope" class="form-control" ng-model="retailerData.retailer.additional_info.type_of_shop">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Distributor ID</label>
+                            <div class="col-lg-8">
+                                <select class="form-control" name="account" ng-model="retailerData.retailer.additional_info.distributor_id" required>
+                                    <option>option 1</option>
+                                    <option>option 2</option>
+                                    <option>option 3</option>
+                                    <option>option 4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group"><label class="col-lg-4 control-label">Category sold on shop</label>
+                            <div class="col-lg-8"><input type="name" placeholder="Phone Number" class="form-control" ng-model="retailerData.retailer.additional_info.category_sold_on_shop">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Address</label>
+                            <div class="col-lg-8"><input type="name" placeholder="line 1" class="form-control" ng-model="retailerData.retailer.address.line1">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Area </label>
+                            <div class="col-lg-8"><input type="name" placeholder="line 2" class="form-control" ng-model="retailerData.retailer.address.line2">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Zone </label>
+                            <div class="col-lg-8"><input type="name" placeholder="zone id" class="form-control" ng-model="retailerData.retailer.address.zone_id">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">City</label>
+                            <div class="col-lg-8"><input type="name" placeholder="city id" class="form-control" ng-model="retailerData.retailer.address.city_id">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Latitude</label>
+                            <div class="col-lg-8"><input type="name" placeholder="latitude" class="form-control" ng-model="retailerData.retailer.address.latitude">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-lg-4 control-label">Longitude</label>
+                            <div class="col-lg-8"><input type="name" placeholder="longitude" class="form-control" ng-model="retailerData.retailer.address.longitude">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-white" data-dismiss="modal" data-ng-click="modalOptions.close()">Close</button>
+    <button type="button" class="btn btn-primary" data-ng-click="modalOptions.ok(this.modalOptions)">Save changes</button>
+</div>

@@ -1,0 +1,12 @@
+<div ng-init="initUserManagement('businessAssociate')">
+    <div breadcrumb name="Business Associate" key="businessAssociate" call-back="breadcrumbCallBack"></div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div app-grid data="gridData" column-defs="columnDefs" perform-call-back="gridActionCallBack"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

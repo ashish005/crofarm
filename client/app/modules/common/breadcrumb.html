@@ -1,15 +1,16 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2 style="text-transform: capitalize;">{{breadcrumb.title}}</h2>
+        <h2 style="text-transform: capitalize;"> {{name}} </h2>
         <ol class="breadcrumb">
             <li>
                 <a href="#/home">Home</a>
             </li>
             <li class="active">
-                <strong style="text-transform: capitalize;">{{breadcrumb.title}}</strong>
+                <strong style="text-transform: capitalize;"> {{name}} </strong>
             </li>
         </ol>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-2 pull-right" style="padding-top: 32px">
+        <div class="btn btn-primary" ng-click="invokeCallBack(key)" style="text-transform: capitalize;"><i class="fa fa-plus"></i>  {{name}} </div>
     </div>
 </div>

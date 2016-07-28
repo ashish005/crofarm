@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" data-ng-click="modalOptions.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">Edit : <strong> {{modalOptions.model['name']}} </strong> </h4>
+</div>
+<div class="modal-body" ng-init="model = modalOptions.model">
+    <form class="form-horizontal">
+        <div class="form-group"  style="margin-bottom: 0px;" ng-repeat="(key, val) in model.info">
+            <label class="col-lg-3 control-label"><span style="text-transform: capitalize;">{{key}}</span></label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" ng-model="val" ng-if="'appLogo' != key && 'pic' != key">
+                <img style="height: 30px;" alt="Logo" ng-if="'appLogo' == key ||'pic' == key" ng-src="{{val}}"/>
+                <span class="help-block m-b-none"></span></div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-white" data-dismiss="modal" data-ng-click="modalOptions.close()">Close</button>
+    <button type="button" class="btn btn-primary" data-ng-click="modalOptions.ok(this.modalOptions)">Save changes</button>
+</div>

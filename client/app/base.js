@@ -173,12 +173,13 @@
             showBCPopup(_popup);
         };
 
-        function showBCPopup (_popup, popupType){
+        function showBCPopup (_popup, popupType, data){
             popupService.showPopup(_popup.templateUrl, {
                 submitData:submitBusinessConfig,
                 updateData:updateData,
                 getInfo:getInfo,
-                type:popupType
+                type:popupType,
+                data: data
             }).then(function (error) {
             }, function (error) {
                 $scope.onInitBusinessConfig('businessConfig');
@@ -204,7 +205,7 @@
 
         $scope.onBusinessConfigEdit = function (type, data){
             var _popup = popupView.userManagement['edit']['businessConfig'];
-            showBCPopup(_popup, type);
+            showBCPopup(_popup, type, data);
         }
 
         $scope.onEdit = function (type, data){

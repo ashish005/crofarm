@@ -2,19 +2,18 @@
     <button type="button" class="close" data-dismiss="modal" data-ng-click="modalOptions.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
     <h4 class="modal-title">Edit : <strong> {{modalOptions.model['name']}} </strong> </h4>
 </div>
-<div class="modal-body" ng-init="model = modalOptions.model">
-    <form class="form-horizontal">
+<div class="modal-body">
+    <div class="form-horizontal">
         <div class="tabs-container" style="margin-bottom: 20px;">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab-1"> Add State</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-2" data-ng-click="getAllStates()">Add City</a></li>
-                <li class=""><a data-toggle="tab" href="#tab-3" data-ng-click="getAllCities()">Add Zone</a></li>
+                <li class="active"><a data-toggle="tab" href="#tab-1"> Add State </a></li>
+                <li class=""><a data-toggle="tab" href="#tab-2" data-ng-click="modalOptions.getInfo(this.modalOptions, 'states')"> Add City </a></li>
+                <li class=""><a data-toggle="tab" href="#tab-3" data-ng-click="modalOptions.getInfo(this.modalOptions, 'cities')"> Add Zone </a></li>
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active">
                     <div class="panel-body">
-                        <h3>Add State</h3>
-                        <form role="form" class="form-horizontal" ng-submit="submitData(stateModel, 'state')">
+                        <form role="form" class="form-horizontal" ng-submit="modalOptions.submitData(this.modalOptions, 'states', stateModel)">
                             <div class="form-group"><label class="col-lg-4 control-label">State Name</label>
                                 <div class="col-lg-8"><input type="state" placeholder="State Name" ng-model="stateModel.name" class="form-control">
                                 </div>
@@ -25,12 +24,11 @@
                 </div>
                 <div id="tab-2" class="tab-pane">
                     <div class="panel-body">
-                        <h3>Add City</h3>
-                        <form role="form" class="form-horizontal" ng-submit="submitData(cityModel, 'city')">
+                        <form role="form" class="form-horizontal" ng-submit="modalOptions.submitData(this.modalOptions, 'cities', cityModel)">
                             <div class="form-group"><label class="col-lg-4 control-label">State Name</label>
                                 <div class="col-lg-8">
                                     <select class="form-control" ng-model="cityModelInfo"
-                                            ng-options="state as state.name for state in stateList"
+                                            ng-options="state as state.name for state in modalOptions.stateslist.states"
                                             ng-change="cityModel.state_id = cityModelInfo.id">
                                     </select>
                                 </div>
@@ -45,12 +43,12 @@
                 </div>
                 <div id="tab-3" class="tab-pane">
                     <div class="panel-body">
-                        <h3>Add Zone</h3>
-                        <form role="form" class="form-horizontal" ng-submit="submitData(zoneModel, 'zone')">
+                        <form role="form" class="form-horizontal" ng-submit="modalOptions.submitData(this.modalOptions, 'zones', zoneModel)">
                             <div class="form-group"><label class="col-lg-4 control-label">City Name</label>
                                 <div class="col-lg-8">
+                                    {{citieslist}}
                                     <select class="form-control" ng-model="zoneModelInfo"
-                                            ng-options="city as city.name for city in cityList"
+                                            ng-options="city as city.name for city in modalOptions.citieslist.cities"
                                             ng-change="zoneModel.city_id = zoneModelInfo.id">
                                     </select>
                                 </div>
@@ -65,10 +63,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
-<!--
-<div class="modal-footer">
-    <button type="button" class="btn btn-white" data-dismiss="modal" data-ng-click="modalOptions.close()">Close</button>
-    <button type="button" class="btn btn-primary" data-ng-click="modalOptions.ok(this.modalOptions)">Save changes</button>
-</div>-->

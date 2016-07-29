@@ -135,10 +135,55 @@
             popupService.showPopup(_popup.templateUrl, data);
         };
 
+        function submitBusinessConfig(that, type, data)
+        {
+            var svc = new userManagementModel()['businessConfig']['post'][type];
+            svc.data = data;
+            ajaxService.http(svc).then(function (response) {
+                console.log(response);
+            },  function (error) {
+                console.log('error' + error);
+            });
+        }
+
+        function updateData(that, type, data)
+        {
+            var svc = new userManagementModel()['businessConfig']['put'][type];
+            svc.params = JSON.stringify(data);
+            ajaxService.http(svc, data).then(function (response) {
+                console.log(response);
+            },  function (error) {
+                console.log('error' + error);
+            });
+        }
+
+        function getInfo(that, type)
+        {
+            var svc = new userManagementModel()['businessConfig']['get'][type];
+            ajaxService.http(svc).then(function (response) {
+                var name = type+'list';
+                that[name] = response;
+            },  function (error) {
+                console.log('error' + error);
+            });
+        }
+
         $scope.breadcrumbCallBack = function(type){
             var _popup = popupView.userManagement['view'][type];
-            popupService.showPopup(_popup.templateUrl, {});
+            showBCPopup(_popup);
         };
+
+        function showBCPopup (_popup, popupType){
+            popupService.showPopup(_popup.templateUrl, {
+                submitData:submitBusinessConfig,
+                updateData:updateData,
+                getInfo:getInfo,
+                type:popupType
+            }).then(function (error) {
+            }, function (error) {
+                $scope.onInitBusinessConfig('businessConfig');
+            });
+        }
 
         $scope.onInitBusinessConfig = function (type)
         {
@@ -157,9 +202,15 @@
             }
         }
 
+        $scope.onBusinessConfigEdit = function (type, data){
+            var _popup = popupView.userManagement['edit']['businessConfig'];
+            showBCPopup(_popup, type);
+        }
+
         $scope.onEdit = function (type, data){
+            /*var _popup = popupView.userManagement['edit'][type];
+            showBCPopup(_popup);*/
             alert('In Pending State');
-            //popupService.showPopup(_popup.templateUrl, {});
         }
     };
 
@@ -199,11 +250,19 @@
                 },
                 businessConfig:{
                     get: {
-                        state:{url : 'users/locations/states/v1/'},
-                        cities:{url : 'users/locations/cities/v1/'},
-                        zones:{url : 'users/locations/zones/v1/'},
-                        allinfo:{url : 'users/locations/allinfo/v1/'}
-                    }
+                        states:{method: 'GET',url : 'users/locations/states/v1/'},
+                        cities:{method: 'GET', url : 'users/locations/cities/v1/'},
+                        zones:{method: 'GET', url : 'users/locations/zones/v1/'},
+                        allinfo:{method: 'GET', url : 'users/locations/allinfo/v1/'}
+                    },
+                    post: {
+                        states:{method: 'POST', url : 'users/locations/states/v1/'},
+                        cities:{method: 'POST', url : 'users/locations/cities/v1/'},
+                        zones:{method: 'POST', url : 'users/locations/zones/v1/'}
+                    },
+                    put: {
+                        zones:{method: 'PUT', url : 'users/locations/zones/v1/'}
+                    },
                 }
             };
         }

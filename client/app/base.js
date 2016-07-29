@@ -132,7 +132,13 @@
         };
         $scope.gridActionCallBack = function(type, data){
             var _popup = popupView.userManagement[type][_userManagementType];
-            popupService.showPopup(_popup.templateUrl, data);
+            var svc = new userManagementModel()[_userManagementType];
+            $scope[type] = new svc.model;
+
+            var _model = new svc.model;
+            var _modelData = angular.extend({}, _model, data);
+
+            popupService.showPopup(_popup.templateUrl, { model : _modelData });
         };
 
         function submitBusinessConfig(that, type, data)
@@ -215,11 +221,68 @@
         }
     };
 
+    function distributor() {
+        this.name = null;
+        this.email = null;
+        this.pan_number = null;
+        this.storage_capacity = null;
+        this.credit_period = null;
+        this.vehicle_info = null;
+        this.ba_required = null;
+        this.security_amount = null;
+        this.bank_account_number = null;
+        this.ifsc_code = null;
+        this.alternate_phone = null;
+        this.father_name = null;
+        this.phone = null;
+        this.zone_id = null;
+        this.name_on_passbook = null;
+        this.credit_limit = null;
+        this.address = function () {
+            this.line1 = null;
+            this.line2 = null;
+            this.city_id = null;
+        };
+    }
+    function retailer() {
+        this.name = null;
+        this.doj = null;
+        this.manager = null;
+        this.fathersName = null;
+        this.DOB = null;
+        this.emailId = null;
+        this.contactNo = null;
+        this.panNo = null;
+        this.bankName = null;
+        this.accNo = null;
+        this.ifsc = null;
+        this.localReference = null;
+        this.emergencyNo = null;
+
+    }
+    function businessAssociate() {
+        this.name = null;
+        this.doj = null;
+        this.manager = null;
+        this.fathersName = null;
+        this.DOB = null;
+        this.emailId = null;
+        this.contactNo = null;
+        this.panNo = null;
+        this.bankName = null;
+        this.accNo = null;
+        this.ifsc = null;
+        this.localReference = null;
+        this.emergencyNo = null;
+
+    }
+
     function userManagementModel(){
         return function () {
             var _actionTemplate = '<div class="ui-grid-cell-contents" actions data="row" perform-call-back="grid.appScope.actionCallBack"></div>'
             return {
                 businessAssociate:{
+                    model: businessAssociate,
                     configs:[
                         { name: 'Action', width:110, cellEditableCondition: true, cellTemplate:_actionTemplate },
                         { name:'name', displayName:'Name' },
@@ -229,6 +292,7 @@
                     get:{ method: 'GET', url: 'users/ba/v1/' }
                 },
                 distributor:{
+                    model:distributor,
                     configs:[
                         { name: 'Action', width:110, cellEditableCondition: true, cellTemplate:_actionTemplate },
                         { name:'name', displayName:'Name'},
@@ -239,6 +303,7 @@
                     get:{ method: 'GET', url: 'users/distributor/v1/' }
                 },
                 retailer:{
+                    model:retailer,
                     configs:[
                         { name:'name', displayName:'Name'},
                         { name:'area', displayName:'Area'},
@@ -400,6 +465,20 @@
         this.notify = function () {}
     }
 
+    function stringToNumber() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModel) {
+                ngModel.$parsers.push(function(value) {
+                    return '' + value;
+                });
+                ngModel.$formatters.push(function(value) {
+                    return parseFloat(value, 10);
+                });
+            }
+        };
+    }
+
     app
         .config(['$httpProvider', httpProvider])
         .config(angularHelper)
@@ -410,6 +489,7 @@
         .directive('breadcrumb', breadcrumb)
         .directive('appGrid', ['$q', '$http','$timeout', appGrid])
         .directive('actions', goActions)
+        .directive('stringToNumber', stringToNumber)
         .controller('appController', ['$scope', '$compile', '$timeout', appController])
         .controller('dashboardController', dashboardController)
         .controller('userManagementController',['$scope', 'userManagementModel', 'popupService', userManagementController])

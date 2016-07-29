@@ -9,68 +9,66 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group"><label class="col-md-5 control-label">Name <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="name" placeholder="BA Name" class="form-control" ng-model="info.name" required>
+                            <div class="col-md-7"><input type="name" placeholder="BA Name" class="form-control" ng-model="model.name" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">Email ID <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="email" placeholder="Email ID" class="form-control" ng-model="info.email" required>
+                            <div class="col-md-7"><input type="email" placeholder="Email ID" class="form-control" ng-model="model.email" required>
                             </div>
                         </div>
 
                         <div class="form-group"><label class="col-md-5 control-label">Phone Number <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="number" placeholder="Phone Number" class="form-control" ng-model="info.phone" required>
+                            <div class="col-md-7"><input type="number" string-to-number placeholder="Phone Number" class="form-control" ng-model="model.phone" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">Alternate Phone Number</label>
-                            <div class="col-md-7"><input type="number" placeholder="Alternate phone number (10 Digit)" class="form-control" ng-model="info.alternate_phone">
+                            <div class="col-md-7"><input type="number" string-to-number placeholder="Alternate phone number (10 Digit)" class="form-control" ng-model="model.alternate_phone">
                             </div>
                         </div>
 
                         <div class="form-group"><label class="col-md-5 control-label">Father's Name </label>
-                            <div class="col-md-7"><input type="Father's Name" placeholder="Father's Name" class="form-control" ng-model="info.father_name">
+                            <div class="col-md-7"><input type="Father's Name" placeholder="Father's Name" class="form-control" ng-model="model.father_name">
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">PAN Number </label>
-                            <div class="col-md-7"><input type="text" placeholder="PAN Card" class="form-control" ng-model="info.pan_number">
+                            <div class="col-md-7"><input type="text" placeholder="PAN Card" class="form-control" ng-model="model.pan_number">
                             </div>
                         </div>
-
-
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group"><label class="col-md-5 control-label">Name on Passbook <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="text" placeholder="Name on passbook" class="form-control" ng-model="info.name_on_passbook" required>
+                            <div class="col-md-7"><input type="text" placeholder="Name on passbook" class="form-control" ng-model="model.name_on_passbook" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">Bank Account Number <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="number" placeholder="Bank Account Number" class="form-control" ng-model="info.ban_account_number" required>
+                            <div class="col-md-7"><input type="number" string-to-number placeholder="Bank Account Number" class="form-control" ng-model="model.ban_account_number" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">IFSC Code <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="name" placeholder="IFSC Code" class="form-control" ng-model="info.ifsc_code" required>
+                            <div class="col-md-7"><input type="name" placeholder="IFSC Code" class="form-control" ng-model="model.ifsc_code" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">Address <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="text" placeholder="line 1" class="form-control" ng-model="info.address.line1" required>
+                            <div class="col-md-7"><input type="text" placeholder="line 1" class="form-control" ng-model="model.address.line1" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">Area <span class="compulsary">*</span></label>
-                            <div class="col-md-7"><input type="text" placeholder="line 2" class="form-control" ng-model="info.address.line2" required>
+                            <div class="col-md-7"><input type="text" placeholder="line 2" class="form-control" ng-model="model.address.line2" required>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">City</label>
                             <div class="col-md-7">
-                                <select class="form-control" ng-model="info.city_id"
+                                <select class="form-control" ng-model="model.city_id"
                                         ng-options="city as city.name for city in modalOptions.cityList"
-                                        ng-change="modalOptions.changeCity(info.city_id.id)">
+                                        ng-change="modalOptions.changeCity(model.city_id.id)">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group"><label class="col-md-5 control-label">Zone </label>
                             <div class="col-md-7">
-                                <select class="form-control" ng-model="info.zone_id"
+                                <select class="form-control" ng-model="model.zone_id"
                                         ng-options="zone as zone.name for zone in modalOptions.zoneList"
-                                        ng-change="baData.ba.zone_id = info.zone_id">
+                                        ng-change="baData.ba.zone_id = model.zone_id">
                                 </select>
                             </div>
                         </div>

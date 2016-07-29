@@ -131,13 +131,27 @@
             });
         };
         $scope.gridActionCallBack = function(type, data){
-            var _popup = popupView.userManagement[type][_userManagementType];
-            var svc = new userManagementModel()[_userManagementType];
+            if('expand' == type && _userManagementType == 'distributor'){
+                if (data.isExpanded) {
+                    data.entity.details = {};
+                    data.entity.detailsType ='distributor';
+                    var svc = new userManagementModel()[_userManagementType];
+                    svc['get'].url += data.entity.id +'/';
 
-            var _model = new svc.model;
-            var _modelData = angular.extend({}, _model, data);
+                    ajaxService.http(svc['get']).then(function (response) {
+                        data.entity.details = response;
+                    },  function (error) {
+                        debugger;
+                    });
+                }
 
-            popupService.showPopup(_popup.templateUrl, { model : _modelData, updateData:updateUserManagementData });
+            }else {
+                var _popup = popupView.userManagement[type][_userManagementType];
+                var svc = new userManagementModel()[_userManagementType];
+                var _model = new svc.model;
+                var _modelData = angular.extend({}, _model, data);
+                popupService.showPopup(_popup.templateUrl, {model: _modelData, updateData: updateUserManagementData});
+            }
         };
 
         function submitBusinessConfig(that, type, data)
@@ -416,12 +430,15 @@
                     enableGridMenu: false,
                     onRegisterApi: function (gridApi) {
                         $scope.gridApi = gridApi;
+                        $scope.gridApi.expandable.on.rowExpandedStateChanged($scope, function(row){
+                            $scope.performCallBack()('expand', row);
+                        });
                     }
                 };
 
                 //Expandable Grid
                 $scope.gridOptions.expandableRowTemplate = _rootPath+ 'modules/common/controls/expandableRowTemplate.html';
-                $scope.gridOptions.expandableRowHeight = 200;
+                $scope.gridOptions.expandableRowHeight = 250;
                 //subGridVariable will be available in subGrid scope
                 $scope.gridOptions.expandableRowScope = {
                     subGridVariable: 'subGridScopeVariable'

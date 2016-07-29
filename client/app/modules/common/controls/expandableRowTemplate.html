@@ -1,6 +1,63 @@
-<div class="row">
-    <div class="col-md-6">
-        <dl>          
+<div class="row" ng-if="'distributor'==row.entity.detailsType" >
+    <div class="col-md-4">
+        <dl>
+            <dt> Name</dt>
+            <dd>{{row.entity.details.name}}</dd>
+            <dt>Email: </dt>
+            <dd>{{row.entity.details.email}}</dd>
+            <dt>Father Name: </dt>
+            <dd>{{row.entity.details.father_name}}</dd>
+            <dt>Phone: </dt>
+            <dd>{{row.entity.details.phone}}</dd>
+            <dt>Alternate Phone: </dt>
+            <dd>{{row.entity.details.alternate_phone}}</dd>
+            <dt>Adress: </dt>
+            <dd>
+                {{row.entity.details.address.line1}}<br/> {{row.entity.details.address.line2}}<br/>
+                {{row.entity.details.address.pincode}}<br/> {{row.entity.details.address.city.name}}<br/>
+                {{row.entity.details.address.city.state.name}}
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <dl>  
+            <dt>Bank Name: </dt>
+            <dd>{{row.entity.details.bank_name}}</dd>
+            <dt>Bank Account Type: </dt>
+            <dd>{{row.entity.details.bank_account_type}}</dd>
+            <dt>Bank Account Number: </dt>
+            <dd>{{row.entity.details.bank_account_number}}</dd>
+            <dt>IFSC Code:</dt>
+            <dd>{{row.entity.details.ifsc_code}}</dd>
+            <dt>Name On Passbook:</dt>
+            <dd>{{row.entity.details.name_on_passbook}}</dd>
+            <dt>Credit Limit:</dt>
+            <dd>{{row.entity.details.credit_limit}}</dd>
+
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <dl>
+            <dt>Pan Number: </dt>
+            <dd>{{row.entity.details.pan_number}}</dd>
+            <dt>Storage Capacity:</dt>
+            <dd>{{row.entity.details.storage_capacity}}</dd>
+            <dt>Credit Period: </dt>
+            <dd>{{row.entity.details.credit_period}}</dd>
+            <dt>Vehicle Info: </dt>
+            <dd>{{row.entity.details.vehicle_info}}</dd>
+            <dt>Ba Required: </dt>
+            <dd>{{row.entity.details.ba_required}}</dd>
+            <dt>Security Amount: </dt>
+            <dd>{{row.entity.details.security_amount}}</dd>
+            <dt>Zone Id: </dt>
+            <dd>{{row.entity.details.zone_id}}</dd>
+        </dl>
+    </div>
+</div>
+<div class="row" ng-if="'distributor'!=row.entity.detailsType">
+    <div class="col-md-4">
+        <dl>
             <dt>Name: </dt>
             <dd>{{row.entity.name}}</dd>
             <dt>Phone Number: </dt>
@@ -9,105 +66,31 @@
             <dd>{{row.entity.phone}}</dd>
             <dt>Alternate Phone:</dt>
             <dd>{{row.entity.alternate_phone}}</dd>
-             <dt>Father Name: </dt>
-            <dd>{{row.entity.father_name}}</dd>
-            <dt>Pan Number: </dt>
-            <dd>{{row.entity.pan_number}}</dd>
-        </dl>
-    </div>
-    <div class="col-md-6">
-        <dl>  
-            <dt>Bank Account Number: </dt>
-            <dd>{{row.entity.bank_account_number}}</dd>
-            <dt>IFSC Code:</dt>
-            <dd>{{row.entity.ifsc_code}}</dd>
-             <dt>Name On Passbook:</dt>
-            <dd>{{row.entity.name_on_passbook}}</dd>
-            <dt>Adress: </dt>
-            <dd>
-                {{row.entity.address.line1}}<br/> {{row.entity.address.line2}}<br/>
-                {{row.entity.address.pincode}}<br/> {{row.entity.address.city.name}}<br/>
-                {{row.entity.address.city.state.name}}
-            </dd>
-        </dl>
-    </div>
-</div>
-<div class="clearfix"></div>
-
-<!-- row detail for distributor 
-<div class="row">
-    {{row.entity}}
-    
-
-    <div class="col-md-6">
-        <dl>          
-            <dt>Name: </dt>
-            <dd>{{row.entity.name}}</dd>
-
-            <dt>Email: </dt>
-            <dd>{{row.entity.email}}</dd>
-
-            <dt>Pan Number: </dt>
-            <dd>{{row.entity.pan_number}}</dd>
-
-            <dt>Storage Capacity:</dt>
-            <dd>{{row.entity.storage_capacity}}</dd>
-            
-             <dt>Credit Period: </dt>
-            <dd>{{row.entity.credit_period}}</dd>
-            
-            <dt>Vehicle Info: </dt>
-            <dd>{{row.entity.vehicle_info}}</dd>
-            
-            <dt>Ba Required: </dt>
-            <dd>{{row.entity.ba_required}}</dd>
-            
-            <dt>Security Amount: </dt>
-            <dd>{{row.entity.security_amount}}</dd>
-            
-            <dt>Alternate Phone: </dt>
-            <dd>{{row.entity.alternate_phone}}</dd>
-                        
             <dt>Father Name: </dt>
             <dd>{{row.entity.father_name}}</dd>
-            
-            <dt>Phone: </dt>
-            <dd>{{row.entity.phone}}</dd>
-            
-             <dt>Zone Id: </dt>
-            <dd>{{row.entity.zone_id}}</dd>
-            
         </dl>
     </div>
-    <div class="col-md-6">
-        <dl>  
-            <dt>Bank Name: </dt>
-            <dd>{{row.entity.bank_name}}</dd>
-            
-            <dt>Bank Account Type: </dt>
-            <dd>{{row.entity.bank_account_type}}</dd>    
-            
+    <div class="col-md-4">
+        <dl>
             <dt>Bank Account Number: </dt>
             <dd>{{row.entity.bank_account_number}}</dd>
-
             <dt>IFSC Code:</dt>
             <dd>{{row.entity.ifsc_code}}</dd>
-            
             <dt>Name On Passbook:</dt>
             <dd>{{row.entity.name_on_passbook}}</dd>
-            
-            <dt>Credit Limit:</dt>
-            <dd>{{row.entity.credit_limit}}</dd>
-            
             <dt>Adress: </dt>
             <dd>
                 {{row.entity.address.line1}}<br/> {{row.entity.address.line2}}<br/>
                 {{row.entity.address.pincode}}<br/> {{row.entity.address.city.name}}<br/>
                 {{row.entity.address.city.state.name}}
-            
             </dd>
         </dl>
     </div>
+    <div class="col-md-4">
+        <dl>
+            <dt>Pan Number: </dt>
+            <dd>{{row.entity.pan_number}}</dd>
+        </dl>
+    </div>
+    <div class="clearfix"></div>
 </div>
-<div class="clearfix"></div>
--->

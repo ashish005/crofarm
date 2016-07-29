@@ -389,7 +389,7 @@
 
                 //Expandable Grid
                 $scope.gridOptions.expandableRowTemplate = _rootPath+ 'modules/common/controls/expandableRowTemplate.html';
-                $scope.gridOptions.expandableRowHeight = 150;
+                $scope.gridOptions.expandableRowHeight = 200;
                 //subGridVariable will be available in subGrid scope
                 $scope.gridOptions.expandableRowScope = {
                     subGridVariable: 'subGridScopeVariable'

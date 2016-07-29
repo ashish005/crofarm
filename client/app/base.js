@@ -144,17 +144,21 @@
         {
             var svc = new userManagementModel()[type];
             ajaxService.http(svc['get']['allinfo']).then(function (response) {
-                $scope.States = response;
+                $scope.states = response;
             },  function (error) {
                 console.log('error' + error);
             });
         };
 
-        $scope.changeInfo = function (type, data){
+        $scope.changeInfo = function (type, data, initType){
             $scope[type] = data;
+            if(initType) {
+                $scope[initType] = [];
+            }
         }
 
         $scope.onEdit = function (type, data){
+            alert('In Pending State');
             //popupService.showPopup(_popup.templateUrl, {});
         }
     };

@@ -7,9 +7,9 @@
                     <div class="ibox-content">
                         <h3>State</h3>
                         <ul class="sortable-list connectList agile-list">
-                            <li ng-repeat="state in States">
-                                <div class="agile-detail" data-ng-click="changeInfo('cities', state.cities)">
-                                    {{state.name}}
+                            <li ng-repeat="state in states">
+                                <div class="agile-detail">
+                                    <span data-ng-click="changeInfo('cityModel', state, 'zoneModel');">{{state.name}}</span>
                                     <span ng-click="onEdit('state',state);" class="pull-right btn btn-xs btn-white"><i class="fa fa-pencil icon-green"></i></span>
                                 </div>
                             </li>
@@ -22,9 +22,10 @@
                     <div class="ibox-content">
                         <h3>City</h3>
                         <ul class="sortable-list connectList agile-list">
-                            <li ng-repeat="city in cities">
-                                <div class="agile-detail" data-ng-click="changeInfo('zones', city.zones)">
-                                    {{city.name}}
+                            {{cities}}
+                            <li ng-repeat="city in cityModel.cities">
+                                <div class="agile-detail">
+                                    <span  data-ng-click="changeInfo('zoneModel', city)">{{city.name}}</span>
                                     <span ng-click="onEdit('city', city);" class="pull-right btn btn-xs btn-white"><i class="fa fa-pencil icon-green"></i></span>
                                 </div>
                             </li>
@@ -37,9 +38,9 @@
                     <div class="ibox-content">
                         <h3>Zones</h3>
                         <ul class="sortable-list connectList agile-list">
-                            <li ng-repeat="zone in zones">
+                            <li ng-repeat="zone in zoneModel.zones">
                                 <div class="agile-detail">
-                                    {{zone.name}}
+                                    <span>{{zone.name}}</span>
                                     <span ng-click="onEdit('zone', zone);" class="pull-right btn btn-xs btn-white"><i class="fa fa-pencil icon-green"></i></span>
                                 </div>
                             </li>
@@ -47,7 +48,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -56,7 +56,7 @@
                         City/State Listing
                     </div>
                     <div class="ibox-content">
-                        <div class="row state-wrapper" ng-repeat="statelist in businessConfigList track by $index">
+                        <div class="row state-wrapper" ng-repeat="statelist in states track by $index">
                             <div class="col-md-12 state-list">{{statelist.name}}</div>
                             <div class="col-md-12 city-list" ng-repeat="citylist in statelist.cities">
                                 <div class="city col-md-3 " >{{citylist.name}}</div>

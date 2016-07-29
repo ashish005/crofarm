@@ -134,14 +134,29 @@
             var _popup = popupView.userManagement[type][_userManagementType];
             popupService.showPopup(_popup.templateUrl, data);
         };
-        $scope.gridActionCallBack = function(type, data){
-            var _popup = popupView.userManagement[type][_userManagementType];
-            popupService.showPopup(_popup.templateUrl, data);
-        };
+
         $scope.breadcrumbCallBack = function(type){
             var _popup = popupView.userManagement['view'][type];
             popupService.showPopup(_popup.templateUrl, {});
         };
+
+        $scope.onInitBusinessConfig = function (type)
+        {
+            var svc = new userManagementModel()[type];
+            ajaxService.http(svc['get']['allinfo']).then(function (response) {
+                $scope.States = response;
+            },  function (error) {
+                console.log('error' + error);
+            });
+        };
+
+        $scope.changeInfo = function (type, data){
+            $scope[type] = data;
+        }
+
+        $scope.onEdit = function (type, data){
+            //popupService.showPopup(_popup.templateUrl, {});
+        }
     };
 
     function userManagementModel(){
@@ -177,6 +192,14 @@
                         { name:'date', displayName:'Date'},
                     ],
                     get:{ method: 'GET', url: 'users/retailers/v1/' }
+                },
+                businessConfig:{
+                    get: {
+                        state:{url : 'users/locations/states/v1/'},
+                        cities:{url : 'users/locations/cities/v1/'},
+                        zones:{url : 'users/locations/zones/v1/'},
+                        allinfo:{url : 'users/locations/allinfo/v1/'}
+                    }
                 }
             };
         }

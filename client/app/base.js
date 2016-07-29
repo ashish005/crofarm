@@ -133,12 +133,11 @@
         $scope.gridActionCallBack = function(type, data){
             var _popup = popupView.userManagement[type][_userManagementType];
             var svc = new userManagementModel()[_userManagementType];
-            $scope[type] = new svc.model;
 
             var _model = new svc.model;
             var _modelData = angular.extend({}, _model, data);
 
-            popupService.showPopup(_popup.templateUrl, { model : _modelData });
+            popupService.showPopup(_popup.templateUrl, { model : _modelData, updateData:updateUserManagementData });
         };
 
         function submitBusinessConfig(that, type, data)
@@ -146,6 +145,29 @@
             var svc = new userManagementModel()['businessConfig']['post'][type];
             svc.data = data;
             ajaxService.http(svc).then(function (response) {
+                console.log(response);
+            },  function (error) {
+                console.log('error' + error);
+            });
+        }
+
+        function submitUserManagementData(that, type, data)
+        {
+            debugger;
+            var svc = new userManagementModel()[_userManagementType]['post'];
+            svc.data = data;
+            ajaxService.http(svc).then(function (response) {
+                console.log(response);
+            },  function (error) {
+                console.log('error' + error);
+            });
+        }
+
+        function updateUserManagementData(that, type, data)
+        {
+            var svc = new userManagementModel()[_userManagementType]['put'];
+            svc.params = JSON.stringify(data);
+            ajaxService.http(svc, data).then(function (response) {
                 console.log(response);
             },  function (error) {
                 console.log('error' + error);
@@ -176,8 +198,25 @@
 
         $scope.breadcrumbCallBack = function(type){
             var _popup = popupView.userManagement['view'][type];
-            showBCPopup(_popup);
+            if(type =='businessConfig'){
+                showBCPopup(_popup);
+            }else{
+                showUserManagementPopup(_popup);
+            }
         };
+
+        function showUserManagementPopup (_popup){
+            var svc = new userManagementModel()[_userManagementType];
+            var _model = new svc.model;
+
+            var _options = {
+                submitData:submitUserManagementData,
+                model:_model
+            };
+
+            popupService.showPopup(_popup.templateUrl, _options).then(function (error) {},
+                function (error) {});
+        }
 
         function showBCPopup (_popup, popupType, data){
             popupService.showPopup(_popup.templateUrl, {
@@ -238,7 +277,8 @@
         this.zone_id = null;
         this.name_on_passbook = null;
         this.credit_limit = null;
-        this.address = function () {
+        this.address = new addressInfo();
+        function addressInfo() {
             this.line1 = null;
             this.line2 = null;
             this.city_id = null;
@@ -289,7 +329,9 @@
                         { name:'phone', displayName:'Phone', width:110 },
                         { name:'pan_number', displayName:'Pan Number', width:200}
                       ],
-                    get:{ method: 'GET', url: 'users/ba/v1/' }
+                    get:{ method: 'GET', url: 'users/ba/v1/' },
+                    post:{ method: 'POST', url: 'users/ba/v1/' },
+                    put:{ method: 'PUT', url: 'users/ba/v1/' }
                 },
                 distributor:{
                     model:distributor,
@@ -300,7 +342,9 @@
                         { name:'credit_limit', displayName:'Credit Limit', width:110},
                         { name:'storage_capacity', displayName:'Storage Capacity', width:110}
                      ],
-                    get:{ method: 'GET', url: 'users/distributor/v1/' }
+                    get:{ method: 'GET', url: 'users/distributor/v1/' },
+                    post:{ method: 'POST', url: 'users/distributor/v1/' },
+                    put:{ method: 'PUT', url: 'users/distributor/v1/' }
                 },
                 retailer:{
                     model:retailer,
@@ -312,7 +356,9 @@
                         { name:'task', displayName:'Task'},
                         { name:'date', displayName:'Date'},
                     ],
-                    get:{ method: 'GET', url: 'users/retailers/v1/' }
+                    get:{ method: 'GET', url: 'users/retailers/v1/' },
+                    post:{ method: 'POST', url: 'users/retailers/v1/' },
+                    put:{ method: 'PUT', url: 'users/retailers/v1/' }
                 },
                 businessConfig:{
                     get: {

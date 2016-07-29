@@ -153,7 +153,6 @@
 
         function submitUserManagementData(that, type, data)
         {
-            debugger;
             var svc = new userManagementModel()[_userManagementType]['post'];
             svc.data = data;
             ajaxService.http(svc).then(function (response) {
@@ -286,19 +285,6 @@
     }
     function retailer() {
         this.name = null;
-        this.doj = null;
-        this.manager = null;
-        this.fathersName = null;
-        this.DOB = null;
-        this.emailId = null;
-        this.contactNo = null;
-        this.panNo = null;
-        this.bankName = null;
-        this.accNo = null;
-        this.ifsc = null;
-        this.localReference = null;
-        this.emergencyNo = null;
-
     }
     function businessAssociate() {
         this.name = null;

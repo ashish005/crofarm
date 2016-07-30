@@ -166,9 +166,16 @@
         }
 
         function submitUserManagementData(that, type, data)
-        {
+         {
             var svc = new userManagementModel()[_userManagementType]['post'];
-            svc.data = data;
+
+             if('businessAssociate' == _userManagementType) {
+                 svc.data = {'ba': data};
+             } else if('businessAssociate' == _userManagementType) {
+                svc.data = {'distributor': data};
+            } else if('retailer' == _userManagementType) {
+                 svc.data = {'retailer': data};
+             }
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
             },  function (error) {
@@ -179,7 +186,16 @@
         function updateUserManagementData(that, type, data)
         {
             var svc = new userManagementModel()[_userManagementType]['put'];
-            svc.data = JSON.stringify(data);
+
+            if('businessAssociate' == _userManagementType) {
+                svc.data = {'ba': data};
+            } else if('businessAssociate' == _userManagementType) {
+                svc.data = {'distributor': data};
+            } else if('retailer' == _userManagementType) {
+                svc.data = {'retailer': data};
+            }
+
+            svc.data = JSON.stringify(svc.data);
             svc.url += data.id+'/';
             ajaxService.http(svc).then(function (response) {
                 console.log(response);

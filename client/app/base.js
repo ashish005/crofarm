@@ -179,8 +179,9 @@
         function updateUserManagementData(that, type, data)
         {
             var svc = new userManagementModel()[_userManagementType]['put'];
-            svc.params = JSON.stringify(data);
-            ajaxService.http(svc, data).then(function (response) {
+            svc.data = JSON.stringify(data);
+            svc.url += data.id+'/';
+            ajaxService.http(svc).then(function (response) {
                 console.log(response);
             },  function (error) {
                 console.log('error' + error);
@@ -497,13 +498,16 @@
         $httpProvider.defaults.timeout = 600000;
     };
 
-    function ajaxService($http, $q, $timeout, configUrl, notifyService) {
+    function ajaxService($http, $q, $timeout, configUrl, notifyService, loading) {
         this.http = function (request, successFunction, errorFunction) {
+            loading.start();
             request.url = configUrl.base + request.url;
             var deferred = $q.defer();
             $http(request).success(function (response) {
+                loading.stop();
                 deferred.resolve(response);
             }).error(function (xhr, status, error, exception) {
+                loading.stop();
                 deferred.reject(xhr);
             });
             return deferred.promise;
@@ -528,16 +532,103 @@
         };
     }
 
+    function stateCityZone($http, $q, configUrl) {
+        return {
+            restrict: 'AE',
+            templateUrl: _rootPath+ 'modules/common/controls/state-city-zone.html',
+            link: function (scope, elem) {},
+            scope:{
+                cityId:'=',
+                zoneId:'=',
+            },
+            controller:function($scope){
+                $scope.changeCity = function(city){
+                    var _info = getInfo();
+                    _info.zone.params = {'city_id': city.id};
+                    $scope.model.city.id  = $scope.cityId = city.id;
+                    $scope.model.city.name  = city.name;
+
+                    http(_info.zone).then(function (response, status) {
+                        $scope.zoneList = response.zones;
+                    }, function (response, status) {
+                        $scope.zoneList = [];
+                    });
+                }
+                $scope.changeZone = function(zone){
+                    $scope.model.zone.id = $scope.zoneId = zone.id;
+                    $scope.model.zone.name  = zone.name;
+                }
+
+                var http = function (request) {
+                    request.url = configUrl.base + request.url;
+                    var deferred = $q.defer();
+                    $http(request).success(function (response) {
+                        deferred.resolve(response);
+                    }).error(function (xhr, status, error, exception) {
+                        deferred.reject(xhr);
+                    });
+                    return deferred.promise;
+                }
+
+                function getInfo()
+                {
+                    return {
+                        state: {method: 'GET', url: 'users/locations/states/v1/'},
+                        city: {method: 'GET', url: 'users/locations/cities/v1/'},
+                        zone: {method: 'GET', url: 'users/locations/zones/v1/'},
+                    }
+                }
+
+
+                function stateCityZoneModel(){
+                    this.state={
+                        id:null,
+                        name:null
+                    },
+                    this.city={
+                        id:null,
+                        name:null
+                    },
+                    this.zone={
+                        id:null,
+                        name:null
+                    }
+
+                }
+                $scope.model = new stateCityZoneModel();
+                (function(){
+                    var _info = getInfo();
+                    http(_info.city).then(function(response, status) {
+                        $scope.cityList = response.cities;
+                    }, function(response, status) {
+                        $scope.cityList = [];
+                    });
+                })();
+            }
+        };
+    }
+
+    var loading = {
+        start: function () {
+            $('#pageLoader').show();
+        },
+        stop: function () {
+            $('#pageLoader').hide();
+        }
+    };
+
     app
         .config(['$httpProvider', httpProvider])
         .config(angularHelper)
         .config(['$routeProvider', config])
         .constant('configUrl', { base:'http://54.169.85.50:8009/' })
+        .constant('loading', loading)
         .directive('appNavigator', appNavigator)
         .directive('topNavbar', topNavbar)
         .directive('breadcrumb', breadcrumb)
         .directive('appGrid', ['$q', '$http','$timeout', appGrid])
         .directive('actions', goActions)
+        .directive('stateCityZone', stateCityZone)
         .directive('stringToNumber', stringToNumber)
         .controller('appController', ['$scope', '$compile', '$timeout', appController])
         .controller('dashboardController', dashboardController)

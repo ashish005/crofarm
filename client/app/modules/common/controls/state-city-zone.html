@@ -1,0 +1,19 @@
+<div>
+    {{cityId}} {{zoneId}}
+    <div class="form-group"><label class="col-md-5 control-label">City</label>
+        <div class="col-md-7">
+            <select class="form-control" ng-model="modelCity"
+                    ng-options="city as city.name for city in cityList"
+                    ng-change="changeCity(modelCity)">
+            </select>
+        </div>
+    </div>
+    <div class="form-group"><label class="col-md-5 control-label">Zone </label>
+        <div class="col-md-7">
+            <select class="form-control" ng-model="modelZone"
+                    ng-options="zone as zone.name for zone in zoneList"
+                    ng-change="changeZone(modelZone)">
+            </select>
+        </div>
+    </div>
+</div>

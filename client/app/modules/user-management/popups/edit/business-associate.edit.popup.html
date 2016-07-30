@@ -57,22 +57,7 @@
                                 <div class="col-md-7"><input type="text" placeholder="line 2" class="form-control" ng-model="model.address.line2" required>
                                 </div>
                             </div>
-                            <div class="form-group"><label class="col-md-5 control-label">City</label>
-                                <div class="col-md-7">
-                                    <select class="form-control" ng-model="model.city_id"
-                                            ng-options="city as city.name for city in modalOptions.cityList"
-                                            ng-change="modalOptions.changeCity(model.city_id.id)">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group"><label class="col-md-5 control-label">Zone </label>
-                                <div class="col-md-7">
-                                    <select class="form-control" ng-model="model.zone_id"
-                                            ng-options="zone as zone.name for zone in modalOptions.zoneList"
-                                            ng-change="baData.ba.zone_id = model.zone_id">
-                                    </select>
-                                </div>
-                            </div>
+                            <div state-city-zone city-id="model.address.city_id" zone-id="model.zone_id"></div>
                         </div>
                     </div>
                 </div>

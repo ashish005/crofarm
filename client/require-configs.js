@@ -18,6 +18,7 @@ require.config({
         angularAMD:  _basePath.libs+'angular/angularAMD.min',
         ngRoute:  _basePath.libs+'angular/angular-route',
         bootstrap: _basePath.libs+'bootstrap/bootstrap.min',
+        'pnotify': _basePath.libs+'pnotify/pnotify.custom.min',
         'ui-bootstrap': _basePath.libs+'bootstrap/ui-bootstrap-tpls-0.12.0.min',
         "app-core":_basePath.app+"core/core",
         "ui-grid":_basePath.libs+"ui-grid/ui-grid-unstable"
@@ -40,9 +41,12 @@ require.config({
         'jQuery-ui':{
             deps: ['jQuery']
         },
+        pnotify:{
+            deps: ['jQuery']
+        },
         "ui-sortable":{deps: ['angular','jQuery-ui']},
         app:{
-            deps: ["app-core",'bootstrap', 'ngRoute', 'ui-bootstrap',"ui-grid"]
+            deps: ["app-core",'bootstrap', 'ngRoute', 'ui-bootstrap',"ui-grid", 'pnotify']
         }
     },
     // kick start application

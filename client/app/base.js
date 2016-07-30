@@ -159,7 +159,9 @@
             svc.data = data;
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
+                _popup.close();
                 $scope.onInitBusinessConfig('businessConfig');
+
             },  function (error) {
                 console.log('error' + error);
             });
@@ -178,6 +180,7 @@
              }
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
+                _popup.close();
                 $scope.initUserManagement(_userManagementType);
             },  function (error) {
                 console.log('error' + error);
@@ -531,6 +534,7 @@
                 deferred.resolve(response);
             }).error(function (xhr, status, error, exception) {
                 loading.stop();
+                notifyService.notifyError(xhr, status, error, exception);
                 deferred.reject(xhr);
             });
             return deferred.promise;
@@ -538,7 +542,71 @@
     }
 
     function notifyService() {
-        this.notify = function () {}
+        var myStack = { "dir1": "down", "dir2": "right", "push": "top" };
+        var pines = {};
+        pines.notify = function () {
+            new PNotify({
+                title: 'Sticky Notice',
+                text: 'Check me out! I\'m a sticky notice. You\'ll have to close me yourself.',
+                hide: false
+            });
+        };
+        pines.notifySuccess = function (opts) {
+            if(!opts) {
+                new PNotify({
+                    title: 'Sticky Success',
+                    text: 'Sticky success... I\'m not even gonna make a joke.',
+                    type: 'success',
+                    hide: false
+                });
+            }else{
+                new PNotify(opts);
+            }
+        };
+        pines.notifyInfo = function (info) {
+            new PNotify({
+                title: 'Notify user',
+                text: info.message,
+                type: 'info',
+                delay: 3000
+            });
+        };
+        pines.notifyError = function (xhr, status, error, exception) {
+            var _error = (null!=xhr && xhr.ErrorKey) ? xhr.ErrorKey:'';
+            var statusErrorMap = {
+                '400': "Server understood the request, but request content was invalid. \n" + _error,
+                '403': "Unauthorized access.",
+                '404': "Resource not found.",
+                '500': "Internal server error.",
+                '503': "Service unavailable."
+            };
+
+            var exceptionErrorMap = {
+                'parsererror': "Error.\nParsing JSON Request failed.",
+                'timeout': "Request Time out.",
+                'abort': "Request was aborted by the server"
+            };
+
+            var message;
+            if (status) {
+                message = statusErrorMap[status];
+            } else if (exception) {
+                message = exceptionErrorMap[exception];
+            }
+            if (!message) {
+                message = "System Error";
+            }
+
+            var opts = {
+                title: "croForm",
+                text: message,
+                type : 'error'
+            };
+            PNotify.removeAll();
+            if(status !== 403) // We are performing auto-redirect to login
+                new PNotify(opts);
+        };
+        return pines;
     }
 
     function stringToNumber() {
@@ -655,7 +723,7 @@
         .controller('dashboardController', dashboardController)
         .controller('userManagementController',['$scope', 'userManagementModel', 'popupService', userManagementController])
         .factory('userManagementModel', ['ajaxService', userManagementModel])
-        .service('notifyService', notifyService)
+        .factory('notifyService', notifyService)
         .service('ajaxService', ['$http', '$q', '$timeout', 'configUrl', 'notifyService', 'loading', ajaxService])
         .run(['$rootScope','authenticationFactory', function($rootScope, authenticationFactory) {
             $rootScope.$on("$routeChangeStart", function (event, nextRoute, currentRoute) {

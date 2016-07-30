@@ -171,7 +171,7 @@
 
              if('businessAssociate' == _userManagementType) {
                  svc.data = {'ba': data};
-             } else if('businessAssociate' == _userManagementType) {
+             } else if('distributor' == _userManagementType) {
                 svc.data = {'distributor': data};
             } else if('retailer' == _userManagementType) {
                  svc.data = {'retailer': data};
@@ -187,15 +187,17 @@
         {
             var svc = new userManagementModel()[_userManagementType]['put'];
 
+            var _dataInfo = {};
             if('businessAssociate' == _userManagementType) {
-                svc.data = {'ba': data};
-            } else if('businessAssociate' == _userManagementType) {
-                svc.data = {'distributor': data};
+                _dataInfo = {'ba': data};
+            } else if('distributor' == _userManagementType) {
+                _dataInfo = {'distributor': data};
             } else if('retailer' == _userManagementType) {
-                svc.data = {'retailer': data};
+                _dataInfo = {'retailer': data};
             }
 
-            svc.data = JSON.stringify(svc.data);
+            svc.data =  JSON.stringify(_dataInfo;
+
             svc.url += data.id+'/';
             ajaxService.http(svc).then(function (response) {
                 console.log(response);

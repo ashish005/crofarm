@@ -649,7 +649,7 @@
     angular.element(document).ready(function () {
         document.body.innerHTML='<div ng-controller="appController as main" id="page-top">' +
             '<div id="wrapper"><div app-navigator ng-if="isLoggedIn"></div><div top-navbar ng-if="isLoggedIn"></div><div id="page-wrapper" ng-view></div></div>' +
-            '<div class="preloader" id="pageLoader"><div class=" block-ui-overlay"></div><div class="block-ui-message-container"><div class="block-ui-message">Loading <span class="loader-img"></span></div></div></div>' +
+            '<div class="preloader" id="pageLoader" style="display: none"><div class=" block-ui-overlay"></div><div class="block-ui-message-container"><div class="block-ui-message">Loading <span class="loader-img"></span></div></div></div>' +
             '</div>';
         angular.bootstrap(document, [appName]);
     });

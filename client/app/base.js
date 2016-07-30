@@ -540,7 +540,6 @@
             return deferred.promise;
         }
     }
-
     function notifyService() {
         var myStack = { "dir1": "down", "dir2": "right", "push": "top" };
         var pines = {};

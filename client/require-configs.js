@@ -49,6 +49,5 @@ require.config({
             deps: ["app-core",'bootstrap', 'ngRoute', 'ui-bootstrap',"ui-grid", 'pnotify']
         }
     },
-    // kick start application
-    deps: ['app']
+    deps: ['app']// kick start application
 });

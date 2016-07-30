@@ -698,6 +698,28 @@
         };
     }
 
+    function maxTextCount() {
+        return {
+            require: "ngModel",
+            scope: {
+                text: "=ngModel"
+            },
+            link: function ($scope, $element, attributes) {
+                var maxTextCount = attributes.maxTextCount;
+                $element.bind("keyup", function () {
+                    var _text = ''+$scope.text;
+                    if (_text.length > maxTextCount) {
+                        _text = _text.substring(0, maxTextCount);
+                        $scope.text = parseInt(_text);
+                        if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                            $scope.$apply();
+                        }
+                    }
+                });
+            }
+        }
+    }
+
     app
         .config(['$httpProvider', httpProvider])
         .config(angularHelper)
@@ -718,6 +740,7 @@
         .directive('actions', goActions)
         .directive('stateCityZone', stateCityZone)
         .directive('stringToNumber', stringToNumber)
+        .directive("maxTextCount", maxTextCount)
         .controller('appController', ['$scope', '$compile', '$timeout', appController])
         .controller('dashboardController', dashboardController)
         .controller('userManagementController',['$scope', 'userManagementModel', 'popupService', userManagementController])

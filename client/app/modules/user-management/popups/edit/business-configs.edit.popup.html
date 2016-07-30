@@ -4,8 +4,9 @@
 </div>
 <form role="form" ng-submit="modalOptions.updateData(this.modalOptions, 'zones', zoneModel)">
     <div class="modal-body">
-        <div class="form-group"><label class="col-lg-4 control-label">Zone Name</label>
-            <div class="col-lg-8" ng-init="zoneModel.name = data.name"><input type="state" placeholder="Zone Name" ng-model="this.modalOptions.data.name" class="form-control">
+        <div class="form-group" ng-init="zoneModel.name = this.modalOptions.data.name"><label class="col-lg-4 control-label">Zone Name</label>
+            <div class="col-lg-8" ng-init="zoneModel.city_id = this.modalOptions.data.id">
+                <input type="state" placeholder="Zone Name" ng-model="zoneModel.name" class="form-control" required>
             </div>
         </div>
     </div>

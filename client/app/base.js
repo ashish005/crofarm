@@ -141,7 +141,6 @@
                     ajaxService.http(svc['get']).then(function (response) {
                         data.entity.details = response;
                     },  function (error) {
-                        debugger;
                     });
                 }
 
@@ -209,7 +208,8 @@
         function updateData(that, type, data)
         {
             var svc = new userManagementModel()['businessConfig']['put'][type];
-            svc.params = JSON.stringify(data);
+            svc.url += data.city_id +'/';
+            svc.data = data;
             ajaxService.http(svc, data).then(function (response) {
                 console.log(response);
             },  function (error) {

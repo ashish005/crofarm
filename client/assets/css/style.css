@@ -7385,6 +7385,11 @@ dl.detail-table dd {
     padding-bottom: 5px;
     font-size: 18px;
 }
+.state-list .agile-list li{float: left; margin-right: 10px; padding: 0;}
+.agile-detail{margin:0;}
+
+.state-list .agile-detail span{padding: 10px; display: block;}
+.city-list .agile-detail span{display: block;}
 .city-list{
     padding-top: 5px;
     padding-bottom: 5px;
@@ -7398,14 +7403,16 @@ dl.detail-table dd {
 /*DL, DT, DD TAGS LIST DATA*/
 dl {
     margin-bottom:50px;
+    color: #999;    
 }
  
 dl dt {
     float:left; 
-    font-weight:bold; 
+    font-weight: bold; 
     margin-right:10px; 
     padding:5px;  
-    width:180px; 
+    width:180px;
+    
 }
  
 dl dd {
@@ -7422,4 +7429,11 @@ dl dd {
         margin: 30px auto;
     }
     .close{position: relative; z-index: 5;}
+    
+    .expendable-row{margin:0; background-color: #f8f8f8;}
+    .icon-user{width: 80px; height: 80px;
+    border-radius: 100%;
+    background: #fff;
+    border: 2px solid #1ab394; overflow: hidden;}
+    .icon-user img{width: 100%; margin-top: 8px;}
 }

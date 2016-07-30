@@ -351,10 +351,10 @@
                 businessAssociate:{
                     model: businessAssociate,
                     configs:[
-                        { name: 'Action', width:110, cellEditableCondition: true, cellTemplate:_actionTemplate },
                         { name:'name', displayName:'Name' },
                         { name:'phone', displayName:'Phone', width:110 },
-                        { name:'pan_number', displayName:'Pan Number', width:200}
+                        { name:'pan_number', displayName:'Pan Number', width:200},
+						{ name: 'Action', width:110, cellEditableCondition: true, cellTemplate:_actionTemplate }
                       ],
                     get:{ method: 'GET', url: 'users/ba/v1/' },
                     post:{ method: 'POST', url: 'users/ba/v1/' },
@@ -363,11 +363,11 @@
                 distributor:{
                     model:distributor,
                     configs:[
-                        { name: 'Action', width:110, cellEditableCondition: true, cellTemplate:_actionTemplate },
                         { name:'name', displayName:'Name'},
                         { name:'zone["name"]', displayName:'Zone', cellTemplate: '<div class="ui-grid-cell-contents">{{ row.entity.zone.name }}</div>', width:110},
                         { name:'credit_limit', displayName:'Credit Limit', width:110},
-                        { name:'storage_capacity', displayName:'Storage Capacity', width:110}
+                        { name:'storage_capacity', displayName:'Storage Capacity', width:110},
+						{ name: 'Action', width:110, cellEditableCondition: true, cellTemplate:_actionTemplate }
                      ],
                     get:{ method: 'GET', url: 'users/distributor/v1/' },
                     post:{ method: 'POST', url: 'users/distributor/v1/' },
@@ -759,10 +759,10 @@
             });
         }]);
 
-    angular.element(document).ready(function () {
+     angular.element(document).ready(function () {
         document.body.innerHTML='<div ng-controller="appController as main" id="page-top">' +
             '<div id="wrapper"><div app-navigator ng-if="isLoggedIn"></div><div top-navbar ng-if="isLoggedIn"></div><div id="page-wrapper" ng-view></div></div>' +
-            '<div class="preloader" id="pageLoader" style="display: none"><div class=" block-ui-overlay"></div><div class="block-ui-message-container"><div class="block-ui-message">Loading <span class="loader-img"></span></div></div></div>' +
+            '<div class="preloader" id="pageLoader" style="display: none"><div class=" block-ui-overlay"></div><div class="block-ui-message-container"><div class="block-ui-message">Loading <span class="loader-img"><img src="assets/images/loader.gif"/></span></div></div></div>' +
             '</div>';
         angular.bootstrap(document, [appName]);
     });

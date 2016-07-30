@@ -1,6 +1,17 @@
-<div class="row" ng-if="'distributor'==row.entity.detailsType" >
+<div class="expendable-row" ng-if="'distributor'==row.entity.detailsType" >
     <div class="col-md-4">
-        <dl>
+        <h3>Personal Info</h3>
+        <div class="icon-user"><img src="../../../../assets/images/user-icon.jpg"/></div>
+        <div class="personal-info">
+            {{row.entity.details.name}}<br/>
+            {{row.entity.details.email}}<br/>
+            {{row.entity.details.phone}}, {{row.entity.details.alternate_phone}}<br/>
+            {{row.entity.details.address.line1}}, {{row.entity.details.address.line2}},
+            {{row.entity.details.address.pincode}} {{row.entity.details.address.city.name}},
+            {{row.entity.details.address.city.state.name}}
+            
+        </div>
+        <!--<dl>
             <dt> Name</dt>
             <dd>{{row.entity.details.name}}</dd>
             <dt>Email: </dt>
@@ -17,9 +28,10 @@
                 {{row.entity.details.address.pincode}}<br/> {{row.entity.details.address.city.name}}<br/>
                 {{row.entity.details.address.city.state.name}}
             </dd>
-        </dl>
+        </dl>-->
     </div>
     <div class="col-md-4">
+        <h3>Bank Info</h3>
         <dl>  
             <dt>Bank Name: </dt>
             <dd>{{row.entity.details.bank_name}}</dd>
@@ -37,6 +49,7 @@
         </dl>
     </div>
     <div class="col-md-4">
+        <h3>Business Info</h3>
         <dl>
             <dt>Pan Number: </dt>
             <dd>{{row.entity.details.pan_number}}</dd>
@@ -57,6 +70,18 @@
 </div>
 <div class="row" ng-if="'distributor'!=row.entity.detailsType">
     <div class="col-md-4">
+        <h3>Personal Info</h3>
+        <div class="icon-user"><img src="../../../../assets/images/user-icon.jpg"/></div>
+        <div class="personal-info">
+            {{row.entity.details.name}}<br/>
+            {{row.entity.details.email}}<br/>
+            {{row.entity.details.phone}}, {{row.entity.details.alternate_phone}}<br/>
+            {{row.entity.address.line1}}, {{row.entity.address.line2}}<br/>
+            {{row.entity.address.city.name}},
+            {{row.entity.address.city.state.name}}, {{row.entity.address.pincode}} 
+            
+        </div>
+        <!--
         <dl>
             <dt>Name: </dt>
             <dd>{{row.entity.name}}</dd>
@@ -69,24 +94,21 @@
             <dt>Father Name: </dt>
             <dd>{{row.entity.father_name}}</dd>
         </dl>
+        -->
     </div>
     <div class="col-md-4">
+        <h3>Bank Detail</h3>
         <dl>
             <dt>Bank Account Number: </dt>
             <dd>{{row.entity.bank_account_number}}</dd>
             <dt>IFSC Code:</dt>
             <dd>{{row.entity.ifsc_code}}</dd>
             <dt>Name On Passbook:</dt>
-            <dd>{{row.entity.name_on_passbook}}</dd>
-            <dt>Adress: </dt>
-            <dd>
-                {{row.entity.address.line1}}<br/> {{row.entity.address.line2}}<br/>
-                {{row.entity.address.pincode}}<br/> {{row.entity.address.city.name}}<br/>
-                {{row.entity.address.city.state.name}}
-            </dd>
+            <dd>{{row.entity.name_on_passbook}}</dd>            
         </dl>
     </div>
     <div class="col-md-4">
+        <h3>Business Info</h3>
         <dl>
             <dt>Pan Number: </dt>
             <dd>{{row.entity.pan_number}}</dd>

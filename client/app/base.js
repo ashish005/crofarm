@@ -159,6 +159,7 @@
             svc.data = data;
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
+                $scope.onInitBusinessConfig('businessConfig');
             },  function (error) {
                 console.log('error' + error);
             });
@@ -177,6 +178,7 @@
              }
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
+                $scope.initUserManagement(_userManagementType);
             },  function (error) {
                 console.log('error' + error);
             });
@@ -246,7 +248,9 @@
                 model:_model
             };
 
-            popupService.showPopup(_popup.templateUrl, _options).then(function (error) {},
+            popupService.showPopup(_popup.templateUrl, _options).then(function (error) {
+
+                },
                 function (error) {});
         }
 
@@ -258,8 +262,9 @@
                 type:popupType,
                 data: data
             }).then(function (error) {
+
             }, function (error) {
-                $scope.onInitBusinessConfig('businessConfig');
+
             });
         }
 

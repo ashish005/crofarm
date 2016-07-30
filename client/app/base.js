@@ -196,7 +196,7 @@
                 _dataInfo = {'retailer': data};
             }
 
-            svc.data =  JSON.stringify(_dataInfo;
+            svc.data =  JSON.stringify(_dataInfo);
 
             svc.url += data.id+'/';
             ajaxService.http(svc).then(function (response) {

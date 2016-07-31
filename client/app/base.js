@@ -159,7 +159,6 @@
                 if (_userManagementType == 'distributor') {
                     svc['get'].url += data.id + '/';
                     ajaxService.http(svc['get']).then(function (response) {
-                        debugger;
                         _options.model = angular.extend({}, _model, response);
                         popupService.showPopup(_popup.templateUrl, _options);
                     }, function (error) {

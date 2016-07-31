@@ -164,7 +164,7 @@
             svc.data = data;
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
-                _popup.close();
+                that.close();
                 $scope.onInitBusinessConfig('businessConfig');
 
             },  function (error) {
@@ -185,7 +185,7 @@
              }
             ajaxService.http(svc).then(function (response) {
                 console.log(response);
-                _popup.close();
+                that.close();
                 $scope.initUserManagement(_userManagementType);
             },  function (error) {
                 console.log('error' + error);
@@ -209,6 +209,7 @@
 
             svc.url += data.id+'/';
             ajaxService.http(svc).then(function (response) {
+                that.close();
                 console.log(response);
             },  function (error) {
                 console.log('error' + error);

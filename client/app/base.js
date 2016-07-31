@@ -136,25 +136,38 @@
         };
         $scope.gridActionCallBack = function(type, data){
             if('expand' == type ) {
-                if (_userManagementType == 'distributor'){
-                    if (data.isExpanded) {
-                        data.entity.details = {};
-                        data.entity.detailsType = 'distributor';
-                        var svc = new userManagementModel()[_userManagementType];
-                        svc['get'].url += data.entity.id + '/';
+                if (data.isExpanded && _userManagementType == 'distributor') {
+                    data.entity.details = {};
+                    data.entity.detailsType = 'distributor';
+                    var svc = new userManagementModel()[_userManagementType];
+                    svc['get'].url += data.entity.id + '/';
 
-                        ajaxService.http(svc['get']).then(function (response) {
-                            data.entity.details = response;
-                        }, function (error) {
-                        });
-                    }
+                    ajaxService.http(svc['get']).then(function (response) {
+                        data.entity.details = response;
+                    }, function (error) {
+                    });
                 }
             }else {
                 var _popup = popupView.userManagement[type][_userManagementType];
                 var svc = new userManagementModel()[_userManagementType];
                 var _model = new svc.model;
-                var _modelData = angular.extend({}, _model, data);
-                popupService.showPopup(_popup.templateUrl, {model: _modelData, updateData: updateUserManagementData});
+                var _options = {
+                    model: null,
+                    updateData: updateUserManagementData
+                };
+
+                if (_userManagementType == 'distributor') {
+                    svc['get'].url += data.id + '/';
+                    ajaxService.http(svc['get']).then(function (response) {
+                        debugger;
+                        _options.model = angular.extend({}, _model, response);
+                        popupService.showPopup(_popup.templateUrl, _options);
+                    }, function (error) {
+                    });
+                }else {
+                    _options.model = angular.extend({}, _model, data);
+                    popupService.showPopup(_popup.templateUrl, _options);
+                }
             }
         };
 

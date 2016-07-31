@@ -1,0 +1,70 @@
+<div class="expendable-row">
+    <div class="col-md-4">
+        <h3>Personal Info</h3>
+        <div class="icon-user"><img src="../../../../assets/images/user-icon.jpg"/></div>
+        <div class="personal-info">
+            {{row.entity.details.name}}<br/>
+            {{row.entity.details.email}}<br/>
+            {{row.entity.details.phone}}, {{row.entity.details.alternate_phone}}<br/>
+            {{row.entity.details.address.line1}}, {{row.entity.details.address.line2}},
+            {{row.entity.details.address.pincode}} {{row.entity.details.address.city.name}},
+            {{row.entity.details.address.city.state.name}}
+
+        </div>
+        <!--<dl>
+            <dt> Name</dt>
+            <dd>{{row.entity.details.name}}</dd>
+            <dt>Email: </dt>
+            <dd>{{row.entity.details.email}}</dd>
+            <dt>Father Name: </dt>
+            <dd>{{row.entity.details.father_name}}</dd>
+            <dt>Phone: </dt>
+            <dd>{{row.entity.details.phone}}</dd>
+            <dt>Alternate Phone: </dt>
+            <dd>{{row.entity.details.alternate_phone}}</dd>
+            <dt>Adress: </dt>
+            <dd>
+                {{row.entity.details.address.line1}}<br/> {{row.entity.details.address.line2}}<br/>
+                {{row.entity.details.address.pincode}}<br/> {{row.entity.details.address.city.name}}<br/>
+                {{row.entity.details.address.city.state.name}}
+            </dd>
+        </dl>-->
+    </div>
+    <div class="col-md-4">
+        <h3>Bank Info</h3>
+        <dl>
+            <dt>Bank Name: </dt>
+            <dd>{{row.entity.details.bank_name}}</dd>
+            <dt>Bank Account Type: </dt>
+            <dd>{{row.entity.details.bank_account_type}}</dd>
+            <dt>Bank Account Number: </dt>
+            <dd>{{row.entity.details.bank_account_number}}</dd>
+            <dt>IFSC Code:</dt>
+            <dd>{{row.entity.details.ifsc_code}}</dd>
+            <dt>Name On Passbook:</dt>
+            <dd>{{row.entity.details.name_on_passbook}}</dd>
+            <dt>Credit Limit:</dt>
+            <dd>{{row.entity.details.credit_limit}}</dd>
+
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <h3>Business Info</h3>
+        <dl>
+            <dt>Pan Number: </dt>
+            <dd>{{row.entity.details.pan_number}}</dd>
+            <dt>Storage Capacity:</dt>
+            <dd>{{row.entity.details.storage_capacity}}</dd>
+            <dt>Credit Period: </dt>
+            <dd>{{row.entity.details.credit_period}}</dd>
+            <dt>Vehicle Info: </dt>
+            <dd>{{row.entity.details.vehicle_info}}</dd>
+            <dt>Ba Required: </dt>
+            <dd>{{row.entity.details.ba_required}}</dd>
+            <dt>Security Amount: </dt>
+            <dd>{{row.entity.details.security_amount}}</dd>
+            <dt>Zone Id: </dt>
+            <dd>{{row.entity.details.zone_id}}</dd>
+        </dl>
+    </div>
+</div>

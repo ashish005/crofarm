@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-4">
+        <h3>Personal Info</h3>
+        <div class="icon-user"><img src="../../../../assets/images/user-icon.jpg"/></div>
+        <div class="personal-info">
+            {{row.entity.details.name}}<br/>
+            {{row.entity.details.email}}<br/>
+            {{row.entity.details.phone}}, {{row.entity.details.alternate_phone}}<br/>
+            {{row.entity.address.line1}}, {{row.entity.address.line2}}<br/>
+            {{row.entity.address.city.name}},
+            {{row.entity.address.city.state.name}}, {{row.entity.address.pincode}}
+
+        </div>
+        <!--
+        <dl>
+            <dt>Name: </dt>
+            <dd>{{row.entity.name}}</dd>
+            <dt>Phone Number: </dt>
+            <dd>{{row.entity.phone}}</dd>
+            <dt>email: </dt>
+            <dd>{{row.entity.phone}}</dd>
+            <dt>Alternate Phone:</dt>
+            <dd>{{row.entity.alternate_phone}}</dd>
+            <dt>Father Name: </dt>
+            <dd>{{row.entity.father_name}}</dd>
+        </dl>
+        -->
+    </div>
+    <div class="col-md-4">
+        <h3>Bank Detail</h3>
+        <dl>
+            <dt>Bank Account Number: </dt>
+            <dd>{{row.entity.bank_account_number}}</dd>
+            <dt>IFSC Code:</dt>
+            <dd>{{row.entity.ifsc_code}}</dd>
+            <dt>Name On Passbook:</dt>
+            <dd>{{row.entity.name_on_passbook}}</dd>
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <h3>Business Info</h3>
+        <dl>
+            <dt>Pan Number: </dt>
+            <dd>{{row.entity.pan_number}}</dd>
+        </dl>
+    </div>
+    <div class="clearfix"></div>
+</div>

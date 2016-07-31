@@ -125,25 +125,30 @@
             var svc = new userManagementModel()[type];
             $scope.columnDefs = svc.configs;
             ajaxService.http(svc['get']).then(function (response) {
-                $scope.gridData = response;
+                if('retailer' == _userManagementType){
+                    $scope.gridData = response.retailers;
+                }else {
+                    $scope.gridData = response;
+                }
             },  function (error) {
                 console.log('error' + error);
             });
         };
         $scope.gridActionCallBack = function(type, data){
-            if('expand' == type && _userManagementType == 'distributor'){
-                if (data.isExpanded) {
-                    data.entity.details = {};
-                    data.entity.detailsType ='distributor';
-                    var svc = new userManagementModel()[_userManagementType];
-                    svc['get'].url += data.entity.id +'/';
+            if('expand' == type ) {
+                if (_userManagementType == 'distributor'){
+                    if (data.isExpanded) {
+                        data.entity.details = {};
+                        data.entity.detailsType = 'distributor';
+                        var svc = new userManagementModel()[_userManagementType];
+                        svc['get'].url += data.entity.id + '/';
 
-                    ajaxService.http(svc['get']).then(function (response) {
-                        data.entity.details = response;
-                    },  function (error) {
-                    });
+                        ajaxService.http(svc['get']).then(function (response) {
+                            data.entity.details = response;
+                        }, function (error) {
+                        });
+                    }
                 }
-
             }else {
                 var _popup = popupView.userManagement[type][_userManagementType];
                 var svc = new userManagementModel()[_userManagementType];
@@ -377,11 +382,8 @@
                     model:retailer,
                     configs:[
                         { name:'name', displayName:'Name'},
-                        { name:'area', displayName:'Area'},
-                        { name:'dealswith', displayName:'Deals With Products'},
-                        { name:'completed', displayName:'Completed'},
-                        { name:'task', displayName:'Task'},
-                        { name:'date', displayName:'Date'},
+                        { name:'phone', displayName:'Phone'},
+                        { name:'email', displayName:'Email'}
                     ],
                     get:{ method: 'GET', url: 'users/retailers/v1/' },
                     post:{ method: 'POST', url: 'users/retailers/v1/' },
@@ -441,11 +443,12 @@
             scope:{
                 data:'=',
                 columnDefs:'=',
-                performCallBack:'&?'
+                performCallBack:'&?',
+                type:'@?'
             },
             link: function ($scope, elem) {},
-            controller:function($scope, $element){
-                $scope.gridHeight =  $(window).height()-340 +"px";
+            controller:function($scope, $element) {
+                $scope.gridHeight = $(window).height() - 340 + "px";
                 $scope.gridOptions = {
                     columnDefs: $scope.columnDefs,
                     data: 'data',
@@ -457,19 +460,23 @@
                     enableGridMenu: false,
                     onRegisterApi: function (gridApi) {
                         $scope.gridApi = gridApi;
-                        $scope.gridApi.expandable.on.rowExpandedStateChanged($scope, function(row){
+                        $scope.gridApi.expandable.on.rowExpandedStateChanged($scope, function (row) {
                             $scope.performCallBack()('expand', row);
                         });
                     }
                 };
 
-                //Expandable Grid
-                $scope.gridOptions.expandableRowTemplate = _rootPath+ 'modules/common/controls/expandableRowTemplate.html';
-                $scope.gridOptions.expandableRowHeight = 250;
-                //subGridVariable will be available in subGrid scope
-                $scope.gridOptions.expandableRowScope = {
-                    subGridVariable: 'subGridScopeVariable'
-                };
+                if ($scope.type){
+                    var _expandBasePath = _rootPath + 'modules/user-management/expand-row-details/';
+
+                    //Expandable Grid
+                    $scope.gridOptions.expandableRowTemplate = _expandBasePath +$scope.type+ '.html';
+                    $scope.gridOptions.expandableRowHeight = 250;
+                    //subGridVariable will be available in subGrid scope
+                    $scope.gridOptions.expandableRowScope = {
+                        subGridVariable: 'subGridScopeVariable'
+                    };
+                }
 
                 $scope.actionCallBack = function(type, data){
                     $scope.performCallBack()(type, data);
